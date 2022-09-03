@@ -5,10 +5,7 @@ import Card from "./card";
 
 const CreateAccount = () => {
   const [show, setShow] = useState(true);
-  // const [status, setStatus] = useState("");
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
+    
   const ctx = useContext(UserContext);
 
   const validateEmail = (value) => {
@@ -40,10 +37,7 @@ const CreateAccount = () => {
   };
 
   const handleCreate = ({ name, email, secret }) => {
-    // setName(name);
-    // setEmail(email);
-    // setPassword(password);
-
+    
     ctx.auth.users.push({
       name,
       email,
@@ -61,9 +55,6 @@ const CreateAccount = () => {
   };
 
   const clearForm = () => {
-    // setName("");
-    // setEmail("");
-    // setPassword("");
     setShow(true);
   };
 
@@ -83,6 +74,7 @@ const CreateAccount = () => {
                     secret: "",
                   }}
                   onSubmit={(values) => handleCreate(values)}
+                  
                 >
                   {({
                     errors,
@@ -153,8 +145,11 @@ const CreateAccount = () => {
                           className="btn btn-secondary"
                           id="submitBtn"
                           type="submit"
-                        >
-                          Submit
+                          disabled={errors.name || errors.email || errors.secret ||
+                          values.name.length === 0 || values.email.length === 0 || values.secret.length === 0
+                          }
+                          >
+                          Add new account
                         </button>
                       </div>
                     </Form>

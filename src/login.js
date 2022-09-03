@@ -6,10 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [show, setShow] = useState(true);
-  const [status, setStatus] = useState("");
-  // const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
   const { auth, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -49,9 +46,6 @@ const Login = () => {
   };
 
   const clearForm = () => {
-    // setName("");
-    setEmail("");
-    setPassword("");
     setShow(true);
   };
 
@@ -59,15 +53,12 @@ const Login = () => {
     <div className="row mt-3">
       <div className="col-6 offset-3">
         <Card
-          // bgcolor="secondary"
           header="Login"
-          status={status}
           body={
             show ? (
               <>
                 <Formik
                   initialValues={{
-                    // name: "",
                     email: "",
                     password: "",
                   }}
@@ -123,8 +114,14 @@ const Login = () => {
                           className="btn btn-secondary"
                           id="submitBtn"
                           type="submit"
+                          disabled={
+                            errors.password ||
+                            errors.email ||
+                            values.email.length === 0 ||
+                            values.password.length === 0
+                          }
                         >
-                          Submit
+                          Login
                         </button>
                       </div>
                     </Form>
@@ -145,6 +142,20 @@ const Login = () => {
                 </button>
               </>
             )
+          }
+        />
+
+        <Card
+          header="Available only for evaluation"
+          title="Preloaded user"
+          text=""
+          body={
+            <>
+              <div className="text-start">
+                <p className="fw-semibold">Username: bayardo@gmail.com</p>
+                <p className="fw-semibold">Password: bayardo22</p>
+              </div>
+            </>
           }
         />
       </div>
